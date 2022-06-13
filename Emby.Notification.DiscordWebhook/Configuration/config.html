@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Discord Webhook Notifications</title>
+</head>
+<body>
+    <div data-role="page" class="page type-interior pluginConfigurationPage discordConfigurationPage" data-require="emby-input,emby-button,emby-checkbox,emby-select">
+
+        <div data-role="content">
+            <div class="content-primary">
+                <form class="discordConfigurationForm">
+                    <div>
+                        <button is="emby-button" type="submit" class="raised button-submit block"><span>Save</span></button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+
+            (function () {
+
+                var pluginId = "";
+                
+                function loadUserConfig(page, userId) {
+
+                    Dashboard.showLoadingMsg();
+
+                    ApiClient.getPluginConfiguration(pluginId).then(function (config) {
+
+
+                        Dashboard.hideLoadingMsg();
+                    });
+                }
+
+                $('.discordConfigurationPage').on('pageinit', function (event) {
+
+                    var page = this;
+
+                    // $('#selectUser', page).on('change', function () {
+
+                    //     loadUserConfig(page, this.value);
+                    // });
+                }).on('pageshow', function (event) {
+
+                    Dashboard.showLoadingMsg();
+
+                    var page = this;
+
+                    // ApiClient.getUsers().then(function (users) {
+
+                    //     $('#selectUser', page).html(users.map(function (user) {
+
+                    //         return '<option value="' + user.Id + '">' + user.Name + '</option>';
+
+                    //     })).trigger('change');
+
+                    // });
+
+                    Dashboard.hideLoadingMsg();
+                });
+
+                $('.discordConfigurationForm').on('submit', function (e) {
+
+                    Dashboard.showLoadingMsg();
+
+                    var form = this;
+
+                    ApiClient.getPluginConfiguration(pluginId).then(function (config) {
+
+                        var userId = $('#selectUser', form).val();
+
+                        var discordConfig = config.Options.filter(function (c) {
+
+                            return userId == c.MediaBrowserUserId;
+
+                        })[0];
+
+                        if (!discordConfig) {
+                            discordConfig = {};
+                            config.Options.push(discordConfig);
+                        }
+
+                        ApiClient.updatePluginConfiguration(pluginId, config).then(Dashboard.processPluginConfigurationUpdateResult);
+                    });
+
+                    return false;
+                });
+
+            })();
+
+        </script>
+
+
+    </div>
+</body>
+</html>
