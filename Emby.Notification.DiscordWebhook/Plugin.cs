@@ -53,7 +53,7 @@ namespace Emby.Notification.DiscordWebhook
             };
         }
 
-        private Guid _id = new Guid("");
+        private Guid _id = new Guid("94c600cc-84f8-4a81-a639-c3200c0b505d");
         public override Guid Id
         {
             get { return _id; }
