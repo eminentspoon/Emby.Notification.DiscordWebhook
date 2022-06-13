@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using MediaBrowser.Common.Net;
-using MediaBrowser.Controller.Net;
 using MediaBrowser.Model.Logging;
 using MediaBrowser.Model.Services;
 using Emby.Notification.DiscordWebhook.Configuration;
-using System.Threading;
 using MediaBrowser.Model.Serialization;
 
 namespace Emby.Notification.DiscordWebhook.Api

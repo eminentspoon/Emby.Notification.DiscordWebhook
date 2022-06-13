@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MediaBrowser.Common.Net;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Notifications;
 using MediaBrowser.Model.Logging;
-using Emby.Notification.DiscordWebhook.Configuration;
 using MediaBrowser.Model.Serialization;
+using Emby.Notification.DiscordWebhook.Configuration;
 
 namespace Emby.Notification.DiscordWebhook
 {
@@ -50,11 +48,9 @@ namespace Emby.Notification.DiscordWebhook
 
         }
 
-
         private bool IsValid(DiscordWebhookPluginOptions options)
         {
             return !string.IsNullOrEmpty(options.DiscordWebHookURI);
         }
     }
 }
-
